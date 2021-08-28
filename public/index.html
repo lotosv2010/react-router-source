@@ -16,17 +16,29 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <div id="router"></div>
+    <button onclick="goto('/a')">goto a</button>
+    <button onclick="goto('/b')">goto b</button>
     <script>
       const router = document.getElementById('router');
-      window.addEventListener('hashchange', () => {
-        const hash = location.hash;
-        console.log(hash)
-        if(hash === '#/a') {
-          router.innerHTML='a'
-        } else {
-          router.innerHTML='b';
+      (function(history) {
+        const oldPushState = history.pushState;
+        history.pushState = (state, title, path) => {
+          oldPushState.call(history, state, title, path);
+          window.onpushState && window.onpushState(state, title, path);
         }
-      })
+      })(window.history);
+
+      window.onpushState = window.onpopstate = (event) => {
+        const pathname = location.pathname;
+        if(pathname === '/a') {
+          router.innerHTML='<h1>A</h1>';
+        } else if(pathname === '/b') {
+          router.innerHTML='<h1>B</h1>'
+        }
+      }
+      function goto(path) {
+        history.pushState({path}, path, path);
+      }
     </script>
   </body>
 </html>
