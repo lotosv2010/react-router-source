@@ -1,13 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Router from './routes';
 import './index.css';
 
-const App = () => {
-  return <div>react-router-source</div>
-}
-
 ReactDOM.render(
-  <App />,
+  <Router />,
   document.getElementById('root')
 );
 
