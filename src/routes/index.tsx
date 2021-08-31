@@ -1,7 +1,7 @@
 import React from 'react';
-import {BrowserRouter as Router, Link, Route, Switch, Redirect} from 'react-router-dom';
+import {BrowserRouter as Router, Link, Route, Switch, Redirect} from '../lib/react-router-dom';
 import Home from '../components/Home';
-import User from '../components/User';
+import User from '../components/User/index';
 
 function Routes() {
   return(
@@ -12,7 +12,7 @@ function Routes() {
           <Link to='/user'>user</Link>
         </p>
         <Switch>
-          <Route path='/user' component={User} />
+          <Route path='/user' exact={false} component={User} />
           <Route path='/home' exact={true} component={Home} />
           <Redirect from='/' to='/home' />
         </Switch>
