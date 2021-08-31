@@ -8,8 +8,8 @@ const User = () => {
   return (
     <div>
       <ul>
-        <li><Link to="/user/list">用户列表</Link></li>
-        <li><Link to="/user/add">添加用户</Link></li>
+        <li><Link style={{cursor: 'pointer'}} to="/user/list">用户列表</Link></li>
+        <li><Link style={{cursor: 'pointer'}} to="/user/add">添加用户</Link></li>
       </ul>
       <div>
         <Route path="/user/add" component={UserAdd} />
