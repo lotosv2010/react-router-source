@@ -2,7 +2,7 @@ import React from 'react';
 import RouterContext from './RouterContext';
 import Lifecycle from './Lifecycle';
 
-function Redirect({to, push = false, from}) {
+function Redirect({to, push = false, from=''}) {
   return (
     <RouterContext.Consumer>
       {
