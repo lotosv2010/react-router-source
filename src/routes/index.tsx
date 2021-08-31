@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router, Link, Route, Switch, Redirect} from '../lib/react-router-dom';
+import {BrowserRouter as Router, Link, Route, Switch, Redirect, NavLink} from '../lib/react-router-dom';
 import Home from '../components/Home';
 import User from '../components/User/index';
 import Login from '../components/Login';
@@ -10,11 +10,28 @@ function Routes() {
   return(
     <Router>
       <div>
-        <p style={{display: 'flex', justifyContent: 'space-around'}}>
-          <Link to='/home'>home</Link>
-          <Link to='/user'>user</Link>
-          <Link to='/profile'>profile</Link>
-        </p>
+        <ul>
+          <li>
+            <NavLink
+              to='/home'
+              activeClassName='active'
+              className='strong'
+              style={{textDecoration: 'underline'}}
+              activeStyle={{color: 'red'}}
+            >home</NavLink></li>
+          <li>
+            <NavLink
+              to='/user'
+              style={{textDecoration: 'underline'}}
+              activeStyle={{color: 'red'}}
+            >user</NavLink></li>
+          <li>
+            <NavLink
+              to='/profile'
+              style={{textDecoration: 'underline'}}
+              activeStyle={{color: 'red'}}
+            >profile</NavLink></li>
+        </ul>
         <Switch>
           <Route path='/user' exact={false} component={User} />
           <Route path='/home' exact={true} component={Home} />
