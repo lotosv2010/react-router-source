@@ -15,22 +15,30 @@ class Route extends Component {
         {
           context => {
             const location = context.location; // 拿到当前的地址信息
-            const {component, computedMath, render} = this.props;
+            const {component, computedMath, render, children} = this.props;
             // 用location和当前的Route的path进行匹配得到匹配的结果
             // todo:如果computedMath属性有值，说明Switch组件已经匹配过了，这里就不需要再匹配了
             const match = computedMath ?? matchPath(location.pathname, this.props)
             const props = {...context, location, match};
-            let element
+            let element;
             if(!match) {
-              return null
-            } else {
-              props.match = match
-              if(component) {
-                element = React.createElement(component, props)
-              } else if(render) {
-                element = render(props)
+              if(children) {
+                // todo: 渲染方式3 children
+                element = children(props);
               } else {
-                element = null
+                return null;
+              }
+            } else {
+              props.match = match;
+              if(children) {
+                // todo: 渲染方式3 children
+                element = children(props);
+              }else if(component) {
+                element = React.createElement(component, props);
+              } else if(render) {
+                element = render(props);
+              } else {
+                element = null;
               }
             }
             return (
@@ -44,4 +52,4 @@ class Route extends Component {
     )
   }
 }
-export default Route
+export default Route;
